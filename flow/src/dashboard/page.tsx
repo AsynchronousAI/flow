@@ -160,7 +160,7 @@ export default function DashboardPage() {
                         return
                       }
                       closePopover()
-                      addTrans(date, parseInt(amount), title, source, type == "deposit" ? true : false)
+                      addTrans(date.getTime(), parseInt(amount), title, source, type == "deposit" ? true : false)
 
                       toast({
                         title: "Added transaction",
