@@ -32,7 +32,6 @@ export function Overview() {
       const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][monthNum];
 
       if (year == new Date().getFullYear()) { // TODO: add withdraws
-        console.log(item.positive, item.amount)
         preData.push({ name: month, total: item.amount * (item.positive ? 1 : -1) })
       }
     }

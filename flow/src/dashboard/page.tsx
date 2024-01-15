@@ -56,6 +56,30 @@ export default function DashboardPage() {
     setIsPopoverOpen(false);
   };
 
+  const [totalThisWeek, setTotalThisWeek] = React.useState(0)
+  const [totalThisMonth, setTotalThisMonth] = React.useState(0)
+  const [totalThisYear, setTotalThisYear] = React.useState(0)
+  const [totalAllTime, setTotalAllTime] = React.useState(0)
+  const [totalDeposits, setTotalDeposits] = React.useState(0)
+  const [totalWithdrawals, setTotalWithdrawals] = React.useState(0)
+  const [monthWithdrawals, setMonthWithdrawals] = React.useState(0)
+  const [monthDeposits, setMonthDeposits] = React.useState(0)
+  const [yearWithdrawals, setYearWithdrawals] = React.useState(0)
+  const [yearDeposits, setYearDeposits] = React.useState(0)
+  const [weekWithdrawals, setWeekWithdrawals] = React.useState(0)
+  const [weekDeposits, setWeekDeposits] = React.useState(0)
+  const [totalWithdrawalValue, setTotalWithdrawalValue] = React.useState(0)
+  const [totalYearWithdrawalValue, setTotalYearWithdrawalValue] = React.useState(0)
+  const [totalMonthWithdrawalValue, setTotalMonthWithdrawalValue] = React.useState(0)
+  const [totalWeekWithdrawalValue, setTotalWeekWithdrawalValue] = React.useState(0)
+  const [averageDeposit, setAverageDeposit] = React.useState(0)
+  const [averageYearDeposit, setAverageYearDeposit] = React.useState(0)
+  const [averageMonthDeposit, setAverageMonthDeposit] = React.useState(0)
+  const [averageWeekDeposit, setAverageWeekDeposit] = React.useState(0)
+  const [yearIncrease, setYearIncrease] = React.useState("-0")
+  const [monthIncrease, setMonthIncrease] = React.useState("-0")
+  const [weekIncrease, setWeekIncrease] = React.useState("-0")
+
   return (
     <>
       <br style={{ lineHeight: '0.5' }} />
@@ -199,19 +223,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">${totalAllTime}</div>
                     <p className="text-xs text-muted-foreground">
                       No comparison
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 purchases</div>
+                    <div className="text-2xl font-bold">{totalDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
-                      No comparison
+                      Average of ${averageDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 earnings</div>
+                    <div className="text-2xl font-bold">{totalWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
-                      No comparison
+                      ${totalWithdrawalValue} withdrawn in total
                     </p>
                   </CardContent>
                 </Card>
@@ -234,19 +258,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">${totalThisYear}</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last year
+                      {yearIncrease}% from last year
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 purchases</div>
+                    <div className="text-2xl font-bold">{yearDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last year
+                    Average of ${averageYearDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 earnings</div>
+                    <div className="text-2xl font-bold">{yearWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last year
+                      ${totalYearWithdrawalValue} withdrawn in total
                     </p>
                   </CardContent>
                 </Card>
@@ -269,19 +293,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">${totalThisMonth}</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
+                      {monthIncrease}% from last month
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 purchases</div>
+                    <div className="text-2xl font-bold">{monthDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
+                    Average of ${averageMonthDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 earnings</div>
+                    <div className="text-2xl font-bold">{monthWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
+                    ${totalMonthWithdrawalValue} withdrawn in total
                     </p>
                   </CardContent>
                 </Card>
@@ -304,19 +328,19 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">${totalThisWeek}</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last week
+                      {weekIncrease}% from last week
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 purchases</div>
+                    <div className="text-2xl font-bold">{weekDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last week
+                    Average of ${averageWeekDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">500 earnings</div>
+                    <div className="text-2xl font-bold">{weekWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
-                      +20.1% from last week
+                    ${totalWeekWithdrawalValue} withdrawn in total
                     </p>
                   </CardContent>
                 </Card>
