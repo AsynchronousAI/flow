@@ -28,7 +28,7 @@ export function RecentSales() {
               {new Date(parseInt(item.date.replace(/,/g, ''))).toDateString()} - {item.source}
             </p>
           </div>
-          <div className="ml-auto font-medium"><p>{item.positive ? "+" : "-"}{item.amount}</p></div>
+          <div className="ml-auto font-medium"><p>{item.positive ? "+" : "-"}${item.amount}</p></div>
         </div>
       ))}
     </div>

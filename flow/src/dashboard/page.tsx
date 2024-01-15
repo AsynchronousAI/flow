@@ -36,7 +36,7 @@ import * as z from "zod"
 import { cn } from "@/lib/utils"
 import { Calendar } from "@/components/ui/calendar"
 import { toast } from "@/components/ui/use-toast"
-
+import { Toaster } from "@/components/ui/toaster"
 
 const FormSchema = z.object({
   dob: z.date({
@@ -45,23 +45,31 @@ const FormSchema = z.object({
 })
 
 export default function DashboardPage() {
-  const [date, setDate] = React.useState<Date | undefined>(new Date())
+  const [date, setDate] = React.useState<Date>()
   const [amount, setAmount] = React.useState<string>("")
   const [title, setTitle] = React.useState<string>("")
   const [source, setSource] = React.useState<string>("")
   const [type, setType] = React.useState<string>("")
+  const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
+
+  const closePopover = () => {
+    setIsPopoverOpen(false);
+  };
 
   return (
     <>
       <br style={{ lineHeight: '0.5' }} />
+      <Toaster />
       <div className="flex-col md:flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
-              <Popover>
+              <Popover open={isPopoverOpen}>
                 <PopoverTrigger>
-                  <Button>Add Transaction</Button>
+                  <Button onClick={() => {
+                    setIsPopoverOpen(!isPopoverOpen);
+                  }}>Add Transaction</Button>
                 </PopoverTrigger>
                 <PopoverContent>
                   <div className="grid gap-4">
@@ -76,7 +84,7 @@ export default function DashboardPage() {
                         <Label htmlFor="amount">Amount</Label>
                         <Input
                           id="amount"
-                          placeholder="$500.00"
+                          placeholder="500.00"
                           className="col-span-2 h-8"
                           onChange={(e) => setAmount(e.target.value)}
                         />
@@ -132,6 +140,9 @@ export default function DashboardPage() {
                               mode="single"
                               selected={date}
                               onSelect={setDate}
+                              disabled={(date) =>
+                                date > new Date() || date < new Date("1900-01-01")
+                              }
                               initialFocus
                             />
                           </PopoverContent>
@@ -143,21 +154,20 @@ export default function DashboardPage() {
                         toast({
                           title: "Missing fields",
                           description: (
-                            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                              Please fill out all fields
-                            </pre>
+                            <p>Please fill out all fields</p>
                           ),
                         })
                         return
                       }
-                      addTrans(date, amount, title, source, type == "deposit" ? true : false)
+                      closePopover()
+                      addTrans(date, parseInt(amount), title, source, type == "deposit" ? true : false)
 
                       toast({
                         title: "Added transaction",
                         description: (
-                          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                            {title}: {amount} {type == "deposit" ? "deposited" : "withdrawn"} on {date.toDateString()} in {source} 
-                          </pre>
+                          <p>
+                            ${amount} {type == "deposit" ? "deposited" : "withdrawn"} on {date.toDateString()} in {source} from '{title}'
+                          </p>
                         ),
                       })
                     }}>Add</Button>
