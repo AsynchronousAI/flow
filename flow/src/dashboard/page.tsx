@@ -71,33 +71,35 @@ export default function DashboardPage() {
     setIsPopoverOpen(false);
   };
 
-  const [totalThisWeek, setTotalThisWeek] = React.useState(0)
-  const [totalThisMonth, setTotalThisMonth] = React.useState(0)
-  const [totalThisYear, setTotalThisYear] = React.useState(0)
-  const [totalAllTime, setTotalAllTime] = React.useState(0)
-  const [totalDeposits, setTotalDeposits] = React.useState(0)
-  const [totalWithdrawals, setTotalWithdrawals] = React.useState(0)
-  const [monthWithdrawals, setMonthWithdrawals] = React.useState(0)
-  const [monthDeposits, setMonthDeposits] = React.useState(0)
-  const [yearWithdrawals, setYearWithdrawals] = React.useState(0)
-  const [yearDeposits, setYearDeposits] = React.useState(0)
-  const [weekWithdrawals, setWeekWithdrawals] = React.useState(0)
-  const [weekDeposits, setWeekDeposits] = React.useState(0)
-  const [totalWithdrawalValue, setTotalWithdrawalValue] = React.useState(0)
-  const [totalYearWithdrawalValue, setTotalYearWithdrawalValue] = React.useState(0)
-  const [totalMonthWithdrawalValue, setTotalMonthWithdrawalValue] = React.useState(0)
-  const [totalWeekWithdrawalValue, setTotalWeekWithdrawalValue] = React.useState(0)
-  const [averageDeposit, setAverageDeposit] = React.useState(0)
-  const [averageYearDeposit, setAverageYearDeposit] = React.useState(0)
-  const [averageMonthDeposit, setAverageMonthDeposit] = React.useState(0)
-  const [averageWeekDeposit, setAverageWeekDeposit] = React.useState(0)
-  const [yearIncrease, setYearIncrease] = React.useState("-0")
-  const [monthIncrease, setMonthIncrease] = React.useState("-0")
-  const [weekIncrease, setWeekIncrease] = React.useState("-0")
+  var totalThisWeek = 0
+  var totalThisMonth = 0
+  var totalThisYear = 0
+  var totalAllTime = 0
+  var totalDeposits = 0
+  var totalWithdrawals = 0
+  var monthWithdrawals = 0
+  var monthDeposits = 0
+  var yearWithdrawals = 0
+  var yearDeposits = 0
+  var weekWithdrawals = 0
+  var weekDeposits = 0
+  var totalWithdrawalValue = 0
+  var totalYearWithdrawalValue = 0
+  var totalMonthWithdrawalValue = 0
+  var totalWeekWithdrawalValue = 0
+  var averageDeposit = 0
+  var averageYearDeposit = 0
+  var averageMonthDeposit = 0
+  var averageWeekDeposit = 0
+  var yearIncrease = "-0"
+  var monthIncrease = "-0"
+  var weekIncrease = "-0"
+
+  const [rerender, setRerender] = React.useState("")
 
   const data = getTrans();
 
-  /*data.map((item: any) => {
+  data.map((item: any) => {
     const year = new Date(parseInt(item.date.replace(/,/g, ''))).getFullYear()
     const month = new Date(parseInt(item.date.replace(/,/g, ''))).getMonth()
     const week = getWeekNumber(new Date(parseInt(item.date.replace(/,/g, ''))))[1]
@@ -106,20 +108,55 @@ export default function DashboardPage() {
     const currentMonth = new Date().getMonth()
     const currentWeek = getWeekNumber(new Date())[1]
 
-    setTotalAllTime(totalAllTime + item.amount * (item.positive ? 1 : -1))
+    totalAllTime += item.positive ? item.amount : -item.amount
+    totalDeposits += item.positive ? 1 : 0
+    totalWithdrawals += item.positive ? 0 : 1
+    averageDeposit = totalAllTime / totalDeposits
+    totalWithdrawalValue += item.positive ? 0 : item.amount
+
     if (year == currentYear) {
-      setTotalThisYear(totalThisYear + item.amount * (item.positive ? 1 : -1))
+      totalThisYear += item.positive ? item.amount : -item.amount
+      yearDeposits += item.positive ? 1 : 0
+      yearWithdrawals += item.positive ? 0 : 1
+      averageYearDeposit = totalThisYear / yearDeposits
+      totalYearWithdrawalValue += item.positive ? 0 : item.amount
     }
+
     if (month == currentMonth) {
-      setTotalThisMonth(totalThisMonth + item.amount * (item.positive ? 1 : -1))
+      totalThisMonth += item.positive ? item.amount : -item.amount
+      monthDeposits += item.positive ? 1 : 0
+      monthWithdrawals += item.positive ? 0 : 1
+      averageMonthDeposit = totalThisMonth / monthDeposits
+      totalMonthWithdrawalValue += item.positive ? 0 : item.amount
     }
+
     if (week == currentWeek) {
-      setTotalThisWeek(totalThisWeek + item.amount * (item.positive ? 1 : -1))
+      totalThisWeek += item.positive ? item.amount : -item.amount
+      weekDeposits += item.positive ? 1 : 0
+      weekWithdrawals += item.positive ? 0 : 1
+      averageWeekDeposit = totalThisWeek / weekDeposits
+      totalWeekWithdrawalValue += item.positive ? 0 : item.amount
     }
-  })*/
+
+    if (averageDeposit == Infinity || isNaN(averageDeposit) || averageDeposit == -Infinity) {
+      averageDeposit = 0
+    }
+    if (averageYearDeposit == Infinity || isNaN(averageYearDeposit) || averageYearDeposit == -Infinity) {
+      averageYearDeposit = 0
+    }
+    if (averageMonthDeposit == Infinity || isNaN(averageMonthDeposit) || averageMonthDeposit == -Infinity) {
+      averageMonthDeposit = 0
+    }
+    if (averageWeekDeposit == Infinity || isNaN(averageWeekDeposit) || averageWeekDeposit == -Infinity) {
+      averageWeekDeposit = 0
+    }
+
+    //setRerender("")
+  })
 
   return (
     <>
+      {rerender}
       <br style={{ lineHeight: '0.5' }} />
       <Toaster />
       <div className="flex-col md:flex">
