@@ -1,7 +1,9 @@
 import { getTrans } from "@/lib/flow"
 
 export function RecentSales() {
-  const testData = getTrans()
+  const testData = getTrans();
+
+  testData.sort((a, b) => parseInt(b.date.replace(/,/g, '')) - parseInt(a.date.replace(/,/g, '')))
   testData.length = 5
 
   return (
@@ -23,7 +25,7 @@ export function RecentSales() {
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{item.title}</p>
             <p className="text-sm text-muted-foreground">
-              {new Date(parseInt(item.date.replace(/,/g, ''))).toLocaleString()} - {item.source}
+              {new Date(parseInt(item.date.replace(/,/g, ''))).toDateString()} - {item.source}
             </p>
           </div>
           <div className="ml-auto font-medium"><p>{item.positive ? "+" : "-"}{item.amount}</p></div>
