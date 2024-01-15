@@ -1,2 +1,0 @@
-# flow
-Money managing app.
