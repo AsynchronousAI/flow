@@ -3,12 +3,12 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
 import { getTrans } from "@/lib/flow"
 
-function abbreviateNumber(value) {
+function abbreviateNumber(value: any) {
   let newValue = value;
   if (value >= 1000) {
     const suffixes = ["", "k", "m", "b","t"];
     const suffixNum = Math.floor(("" + value).length / 3);
-    let shortValue = '';
+    let shortValue: any = '';
     for (let precision = 2; precision >= 1; precision--) {
       shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
       const dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
@@ -22,7 +22,7 @@ function abbreviateNumber(value) {
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec"]
 export function Overview() {
   const numData = getTrans();
-  var preData = []
+  var preData: any = []
   var data = [
     { name: months[0], total: 0 },
     { name: months[1], total: 0 },
