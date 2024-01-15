@@ -1,12 +1,9 @@
+import { getTrans } from "@/lib/flow"
+
 export function RecentSales() {
-  const testData = [
-    {
-      date: "2021-01-01",
-      title: "Bought 1 BTC",
-      price: "$45,231.89",
-      positive: false,
-    },
-  ]
+  const testData = getTrans()
+  testData.length = 5
+
   return (
     <div className="space-y-8">
       {testData.map((item) => (
@@ -26,10 +23,10 @@ export function RecentSales() {
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{item.title}</p>
             <p className="text-sm text-muted-foreground">
-              {item.date}
+              {new Date(parseInt(item.date.replace(/,/g, ''))).toLocaleString()} - {item.source}
             </p>
           </div>
-          <div className="ml-auto font-medium"><p style={/*{ color: item.positive ? "#adfa1d" : "#E65B63" }*/{}}>{item.positive ? "+" : "-"}{item.price}</p></div>
+          <div className="ml-auto font-medium"><p>{item.positive ? "+" : "-"}{item.amount}</p></div>
         </div>
       ))}
     </div>

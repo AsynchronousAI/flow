@@ -1,18 +1,21 @@
 import { saveJSON, loadJSON } from "./utils";
 
-export function addTrans(date, amount: string, title: string, pos: boolean) {
-    let table = loadJSON("transactions")
+var saveName = "flow"
+
+export function addTrans(date, amount: string, title: string, source: string, pos: boolean) {
+    let table = loadJSON(saveName)
     table.push({
       date: date.toLocaleString(),
       amount: amount,
       title: title,
       positive: pos,
+      source: source,
     })
 
-    saveJSON("transactions", table)
+    saveJSON(saveName, table)
 }
 export function getTrans() {
-    return loadJSON("transactions")
+    return loadJSON(saveName)
 }
 export function connect() {
   

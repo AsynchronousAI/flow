@@ -20,7 +20,7 @@ export default function DashboardPage() {
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <Button onClick={() => {
-                addTrans(Date.now(), "$1000", "WOW", true)
+                addTrans(Date.now(), "$1000", "WOW", "Paypal", true)
               }}>Add transaction</Button>
               {/*<Button onClick={exportData} variant="secondary">Export</Button>
               <Button onClick={connect} variant="secondary">Connect</Button>*/}
@@ -181,9 +181,6 @@ export default function DashboardPage() {
                 <Card className="col-span-3">
                   <CardHeader>
                     <CardTitle>Recent Earnings</CardTitle>
-                    <CardDescription>
-                      You earned $1000 this week.
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <RecentSales />
