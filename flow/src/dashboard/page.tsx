@@ -91,9 +91,13 @@ export default function DashboardPage() {
   var averageYearDeposit = 0
   var averageMonthDeposit = 0
   var averageWeekDeposit = 0
-  var yearIncrease = "-0"
-  var monthIncrease = "-0"
-  var weekIncrease = "-0"
+  var yearIncrease = -0
+  var monthIncrease = -0
+  var weekIncrease = -0
+
+  var lastYearAlltime = 0
+  var lastMonthAlltime = 0
+  var lastWeekAlltime = 0
 
   const [rerender, setRerender] = React.useState("")
 
@@ -114,12 +118,23 @@ export default function DashboardPage() {
     averageDeposit = totalAllTime / totalDeposits
     totalWithdrawalValue += item.positive ? 0 : item.amount
 
+    if (year == currentYear - 1) {
+      lastYearAlltime += item.positive ? item.amount : -item.amount
+    }
+    if (month == currentMonth - 1) {
+      lastMonthAlltime += item.positive ? item.amount : -item.amount
+    }
+    if (week == currentWeek - 1) {
+      lastWeekAlltime += item.positive ? item.amount : -item.amount
+    }
+
     if (year == currentYear) {
       totalThisYear += item.positive ? item.amount : -item.amount
       yearDeposits += item.positive ? 1 : 0
       yearWithdrawals += item.positive ? 0 : 1
       averageYearDeposit = totalThisYear / yearDeposits
       totalYearWithdrawalValue += item.positive ? 0 : item.amount
+      yearIncrease = (((totalThisYear - lastYearAlltime) / lastYearAlltime) * 100).toFixed(0)
     }
 
     if (month == currentMonth) {
@@ -128,6 +143,7 @@ export default function DashboardPage() {
       monthWithdrawals += item.positive ? 0 : 1
       averageMonthDeposit = totalThisMonth / monthDeposits
       totalMonthWithdrawalValue += item.positive ? 0 : item.amount
+      monthIncrease = (((totalThisMonth - lastMonthAlltime) / lastMonthAlltime) * 100).toFixed(0)
     }
 
     if (week == currentWeek) {
@@ -136,6 +152,7 @@ export default function DashboardPage() {
       weekWithdrawals += item.positive ? 0 : 1
       averageWeekDeposit = totalThisWeek / weekDeposits
       totalWeekWithdrawalValue += item.positive ? 0 : item.amount
+      weekIncrease = (((totalThisWeek - lastWeekAlltime) / lastWeekAlltime) * 100).toFixed(0)
     }
 
     if (averageDeposit == Infinity || isNaN(averageDeposit) || averageDeposit == -Infinity) {
@@ -149,6 +166,15 @@ export default function DashboardPage() {
     }
     if (averageWeekDeposit == Infinity || isNaN(averageWeekDeposit) || averageWeekDeposit == -Infinity) {
       averageWeekDeposit = 0
+    }
+    if (yearIncrease == Infinity || isNaN(yearIncrease) || yearIncrease == -Infinity) {
+      yearIncrease = "-0"
+    }
+    if (monthIncrease == Infinity || isNaN(monthIncrease) || monthIncrease == -Infinity) {
+      monthIncrease = "-0"
+    }
+    if (weekIncrease == Infinity || isNaN(weekIncrease) || weekIncrease == -Infinity) {
+      weekIncrease = "-0"
     }
 
     //setRerender("")

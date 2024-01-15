@@ -1,6 +1,6 @@
 import { saveJSON, loadJSON } from "./utils";
 
-var saveName = "flow-transactions3"
+var saveName = "flow-deploy"
 
 export function addTrans(date, amount: number, title: string, source: string, pos: boolean) {
     let table = loadJSON(saveName)
