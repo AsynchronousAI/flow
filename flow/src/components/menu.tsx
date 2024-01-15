@@ -46,7 +46,7 @@ export function Menu() {
         </MenubarMenu>
 
         <MenubarMenu>
-          <MenubarTrigger className="font-bold">App</MenubarTrigger>
+          <MenubarTrigger className="">App</MenubarTrigger>
           <Dialog modal={false}>
             <MenubarContent>
               <DialogTrigger asChild>

@@ -125,7 +125,7 @@ export default function DashboardPage() {
       <div className="flex-col md:flex">
         <div className="flex-1 space-y-4 p-8 pt-6">
           <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+            <h2 className="text-3xl  tracking-tight">Dashboard</h2>
             <div className="flex items-center space-x-2">
               <Popover open={isPopoverOpen}>
                 <PopoverTrigger>
@@ -261,17 +261,17 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">${totalAllTime}</div>
+                    <div className="text-2xl">${totalAllTime}</div>
                     <p className="text-xs text-muted-foreground">
                       No comparison
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{totalDeposits} deposits</div>
+                    <div className="text-2xl">{totalDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
                       Average of ${averageDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{totalWithdrawals} withdrawels</div>
+                    <div className="text-2xl">{totalWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
                       ${totalWithdrawalValue} withdrawn in total
                     </p>
@@ -296,17 +296,17 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">${totalThisYear}</div>
+                    <div className="text-2xl">${totalThisYear}</div>
                     <p className="text-xs text-muted-foreground">
                       {yearIncrease}% from last year
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{yearDeposits} deposits</div>
+                    <div className="text-2xl">{yearDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
                     Average of ${averageYearDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{yearWithdrawals} withdrawels</div>
+                    <div className="text-2xl">{yearWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
                       ${totalYearWithdrawalValue} withdrawn in total
                     </p>
@@ -331,17 +331,17 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">${totalThisMonth}</div>
+                    <div className="text-2xl">${totalThisMonth}</div>
                     <p className="text-xs text-muted-foreground">
                       {monthIncrease}% from last month
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{monthDeposits} deposits</div>
+                    <div className="text-2xl">{monthDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
                     Average of ${averageMonthDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{monthWithdrawals} withdrawels</div>
+                    <div className="text-2xl">{monthWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
                     ${totalMonthWithdrawalValue} withdrawn in total
                     </p>
@@ -366,17 +366,17 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">${totalThisWeek}</div>
+                    <div className="text-2xl">${totalThisWeek}</div>
                     <p className="text-xs text-muted-foreground">
                       {weekIncrease}% from last week
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{weekDeposits} deposits</div>
+                    <div className="text-2xl">{weekDeposits} deposits</div>
                     <p className="text-xs text-muted-foreground">
                     Average of ${averageWeekDeposit} per deposit
                     </p>
                     <br />
-                    <div className="text-2xl font-bold">{weekWithdrawals} withdrawels</div>
+                    <div className="text-2xl">{weekWithdrawals} withdrawels</div>
                     <p className="text-xs text-muted-foreground">
                     ${totalWeekWithdrawalValue} withdrawn in total
                     </p>
@@ -395,7 +395,7 @@ export default function DashboardPage() {
                 </Card>
                 <Card className="col-span-3">
                   <CardHeader>
-                    <CardTitle>Recent Earnings</CardTitle>
+                    <CardTitle>Recent Transactions</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <RecentSales />
