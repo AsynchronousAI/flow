@@ -1,14 +1,14 @@
 import { getTrans } from "@/lib/flow"
 
 export function RecentSales() {
-  const testData = getTrans();
+  const Data = getTrans();
 
-  testData.sort((a, b) => parseInt(b.date.replace(/,/g, '')) - parseInt(a.date.replace(/,/g, '')))
-  testData.length = 5
+  Data.sort((a, b) => parseInt(b.date.replace(/,/g, '')) - parseInt(a.date.replace(/,/g, '')))
+  Data.length = 5
 
   return (
     <div className="space-y-8">
-      {testData.map((item) => (
+      {Data.map((item) => (
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
