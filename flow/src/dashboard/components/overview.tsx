@@ -19,20 +19,33 @@ function abbreviateNumber(value) {
   }
   return newValue;
 }
-
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Nov", "Dec"]
 export function Overview() {
   const numData = getTrans();
   var preData = []
-  var data = []
+  var data = [
+    { name: months[0], total: 0 },
+    { name: months[1], total: 0 },
+    { name: months[2], total: 0 },
+    { name: months[3], total: 0 },
+    { name: months[4], total: 0 },
+    { name: months[5], total: 0 },
+    { name: months[6], total: 0 },
+    { name: months[7], total: 0 },
+    { name: months[8], total: 0 },
+    { name: months[9], total: 0 },
+    { name: months[10], total: 0 },
+    { name: months[11], total: 0 },
+  ]
+    
 
   numData.forEach((item: any) => {
     if (item.positive) {
       const year = new Date(parseInt(item.date.replace(/,/g, ''))).getFullYear()
       const monthNum = new Date(parseInt(item.date.replace(/,/g, ''))).getMonth()
-      const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][monthNum];
-
+      const month = months[monthNum];
       if (year == new Date().getFullYear()) { // TODO: add withdraws
-        preData.push({ name: month, total: item.amount * (item.positive ? 1 : -1) })
+        preData.push({ name: month, total: item.positive ? item.amount : -item.amount })
       }
     }
   })

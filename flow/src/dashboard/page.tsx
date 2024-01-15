@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card"
 import { Overview } from "@/dashboard/components/overview"
 import { RecentSales } from "@/dashboard/components/recent-sales"
-import { addTrans, connect, exportData } from "@/lib/flow"
+import { addTrans, connect, exportData, getTrans } from "@/lib/flow"
 import {
   Popover,
   PopoverContent,
@@ -29,7 +29,7 @@ import {
 import * as React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CalendarIcon } from "@radix-ui/react-icons"
-import { format } from "date-fns"
+import { format, set } from "date-fns"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
  
@@ -43,6 +43,21 @@ const FormSchema = z.object({
     required_error: "A time is required.",
   }),
 })
+
+function getWeekNumber(d) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  // Get first day of year
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  // Return array of year and week number
+  return [d.getUTCFullYear(), weekNo];
+}
+
 
 export default function DashboardPage() {
   const [date, setDate] = React.useState<Date>()
@@ -79,6 +94,29 @@ export default function DashboardPage() {
   const [yearIncrease, setYearIncrease] = React.useState("-0")
   const [monthIncrease, setMonthIncrease] = React.useState("-0")
   const [weekIncrease, setWeekIncrease] = React.useState("-0")
+
+  const data = getTrans();
+
+  /*data.map((item: any) => {
+    const year = new Date(parseInt(item.date.replace(/,/g, ''))).getFullYear()
+    const month = new Date(parseInt(item.date.replace(/,/g, ''))).getMonth()
+    const week = getWeekNumber(new Date(parseInt(item.date.replace(/,/g, ''))))[1]
+
+    const currentYear = new Date().getFullYear()
+    const currentMonth = new Date().getMonth()
+    const currentWeek = getWeekNumber(new Date())[1]
+
+    setTotalAllTime(totalAllTime + item.amount * (item.positive ? 1 : -1))
+    if (year == currentYear) {
+      setTotalThisYear(totalThisYear + item.amount * (item.positive ? 1 : -1))
+    }
+    if (month == currentMonth) {
+      setTotalThisMonth(totalThisMonth + item.amount * (item.positive ? 1 : -1))
+    }
+    if (week == currentWeek) {
+      setTotalThisWeek(totalThisWeek + item.amount * (item.positive ? 1 : -1))
+    }
+  })*/
 
   return (
     <>
@@ -349,6 +387,7 @@ export default function DashboardPage() {
                 <Card className="col-span-4">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
+                    <CardDescription>Does not show withdrawels</CardDescription>
                   </CardHeader>
                   <CardContent className="pl-2">
                     <Overview />
